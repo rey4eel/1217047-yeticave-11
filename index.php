@@ -1,7 +1,31 @@
 <?php
 $is_auth = rand(0, 1);
 
-$user_name = "Vartan Saakian"; // укажите здесь ваше имя
+$user_name = "Vartan Saakian";
+$categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
+$items = [
+    [
+    'name' => '2014 Rossignol District Snowboard',
+    'price' =>'10999',
+    'Img URL' => 'img/lot-1.jpg',
+    ],
+    [
+    'name' => 'DC Ply Mens 2016/2017 Snowboard',
+    'price' =>'159999',
+    'Img URL' => 'img/lot-2.jpg',
+    ],
+    [
+    'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
+    'price' =>'8000',
+    'Img URL' => 'img/lot-3.jpg',        
+    ],
+
+        ];
+
+$lot = [$categories,$items];
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -28,14 +52,16 @@ $user_name = "Vartan Saakian"; // укажите здесь ваше имя
 
         <nav class="user-menu">
 
-        <?php if ($is_auth == "1"): ?>
+        <!--Else If function added-->
+
+        <?php if ($is_auth === 1) : ?>
             <div class="user-menu__logged">
                 <p><?=$user_name;?></p>
                 <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
                 <a class="user-menu__logout" href="#">Выход</a>
             </div>
 
-        <?php else: ?>
+        <?php else : ?>
 
             <ul class="user-menu__list">
                 <li class="user-menu__item">
@@ -57,10 +83,16 @@ $user_name = "Vartan Saakian"; // укажите здесь ваше имя
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
-            <!--заполните этот список из массива категорий-->
+        
+        <!--Foreach function added-->
+        <?php foreach ($categories as $key => $value): ?>
+
             <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html">Имя категории</a>
+                <a class="promo__link" href="pages/all-lots.html"><?=$value; ?></a>
             </li>
+
+        <?php endforeach; ?>
+
         </ul>
     </section>
     <section class="lots">
@@ -68,7 +100,12 @@ $user_name = "Vartan Saakian"; // укажите здесь ваше имя
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
+            
             <!--заполните этот список из массива с товарами-->
+            <?php foreach ($variable as $key => $value) {
+                # code...
+            }>
+
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="" width="350" height="260" alt="">
@@ -87,6 +124,8 @@ $user_name = "Vartan Saakian"; // укажите здесь ваше имя
                     </div>
                 </div>
             </li>
+
+
         </ul>
     </section>
 </main>
@@ -95,10 +134,17 @@ $user_name = "Vartan Saakian"; // укажите здесь ваше имя
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <!--заполните этот список из массива категорий-->
+        
+        <!--Foreach function added-->
+
+        <?php foreach ($categories as $key => $value): ?>
+
             <li class="nav__item">
-                <a href="pages/all-lots.html">Название категории</a>
+                <a href="pages/all-lots.html"><?=$value;?></a>
             </li>
+
+        <?php endforeach; ?>
+
         </ul>
     </nav>
     <div class="main-footer__bottom container">
