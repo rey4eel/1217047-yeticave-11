@@ -102,9 +102,6 @@ $lot = [$categories,$items];
         <ul class="lots__list">
             
             <!--заполните этот список из массива с товарами-->
-            <?php foreach ($variable as $key => $value) {
-                # code...
-            }>
 
             <li class="lots__item lot">
                 <div class="lot__image">
