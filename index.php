@@ -2,43 +2,49 @@
 $is_auth = rand(0, 1);
 
 $user_name = "Vartan Saakian";
-// Стандартное обьявление массива с категориями
-$categories = array("Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное");
-// Использовал функцию array() чтобы присвоить значение категории.
-$items = array(
-    $categories[0]=> array(
-    'name' => '2014 Rossignol District Snowboard',
-    'price' =>'10999',
-    'Img URL' => 'img/lot-1.jpg',
-    ),
-    $categories[1]=> array(
-    'name' => 'DC Ply Mens 2016/2017 Snowboard',
-    'price' =>'159999',
-    'Img URL' => 'img/lot-2.jpg',
-    ),
-    $categories[2]=> array(
-    'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
-    'price' =>'8000',
-    'Img URL' => 'img/lot-3.jpg',        
-    ),
-    $categories[3]=> array(
+// Изменил принцип обьявления
+$categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+// Изменил принцип обьявления добавил категорию
+$items = [
+    [
+        'name' => '2014 Rossignol District Snowboard',
+        'price' =>'10999',
+        'img' => 'img/lot-1.jpg',
+        'category' => 'Доски и лыжи',
+    ],
+    [
+        'name' => 'DC Ply Mens 2016/2017 Snowboard',
+        'price' =>'159999',
+        'img' => 'img/lot-2.jpg',
+        'category' => 'Доски и лыжи',
+    ],
+    [
+        'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
+        'price' =>'8000',
+        'img' => 'img/lot-3.jpg',
+        'category' => 'Крепления',
+    ],
+    [
         'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
         'price' =>'10999',
-        'Img URL' => 'img/lot-4.jpg',
-    ),
-    $categories[4]=> array(
+        'img' => 'img/lot-4.jpg',
+        'category' => 'Ботинки',
+    ],
+    [
         'name' => 'Куртка для сноуборда DC Mutiny Charocal	',
         'price' =>'7500',
-        'Img URL' => 'img/lot-5.jpg',
-    ),
-    $categories[5]=> array(
+        'img' => 'img/lot-5.jpg',
+        'category' => 'Одежда',
+    ],
+    [
         'name' => 'Маска Oakley Canopy',
         'price' =>'5400	',
-        'Img URL' => 'img/lot-6.jpg',
-    )
+        'img' => 'img/lot-6.jpg',
+        'category' => 'Разное',
+    ]
 
-);
-//print_r($items);
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -118,10 +124,10 @@ $items = array(
             <?php foreach($items as $key => $val) : ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?=$val['Img URL'];?>" width="350" height="260" alt="">
+                    <img src="<?=$val['img'];?>" width="350" height="260" alt="">
                 </div>
                 <div class="lot__info">
-                    <span class="lot__category"><?=$key;?></span>
+                    <span class="lot__category"><?=$val['category'];?></span>
                     <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?=$val['name'];?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
