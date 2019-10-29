@@ -44,6 +44,22 @@ $lots = [
     ]
 
 ];
+// Функция принимает в себя string потому как на выходе необходимо вернуть также string. Для удобаства работы
+// с готовыми функциями string был приведен к int.
+
+function price_format(string $price){
+    $currency = "р";
+    $convert_price = intval($price);
+    //var_dump($test);
+    $price_ceil = ceil($convert_price);
+    if ($price_ceil < 1000){
+        return $price = strval($price_ceil)." ". $currency;
+    }
+    else {
+        $formated_price = number_format($price_ceil,0,'',' ');
+        return $price = strval($formated_price)." ". $currency;
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -132,7 +148,7 @@ $lots = [
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=$lot['price'];?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=price_format($lot['price']);?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
