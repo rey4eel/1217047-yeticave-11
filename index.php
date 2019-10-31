@@ -44,21 +44,22 @@ $lots = [
     ]
 
 ];
-// Функция принимает в себя string потому как на выходе необходимо вернуть также string. Для удобаства работы
-// с готовыми функциями string был приведен к int.
 
-function price_format(string $price){
-    $currency = "р";
-    $convert_price = intval($price);
-    //var_dump($test);
-    $price_ceil = ceil($convert_price);
-    if ($price_ceil < 1000){
-        return $price = strval($price_ceil)." ". $currency;
+/**
+ * @param int $price
+ * @return string
+ */
+function price_format(int $price): string
+{
+    $currency = '<b class="rub">р</b>';
+    $price = ceil($price);
+    if ($price < 1000) {
+        return $price .' '.$currency;
     }
-    else {
-        $formated_price = number_format($price_ceil,0,'',' ');
-        return $price = strval($formated_price)." ". $currency;
-    }
+        $formated_price = number_format($price , 0 , '' ,"&nbsp;");
+
+        return $price = $formated_price.' '.$currency;
+
 }
 
 ?>
