@@ -53,13 +53,11 @@ function price_format(int $price): string
 {
     $currency = '<b class="rub">р</b>';
     $price = ceil($price);
-    if ($price < 1000) {
-        return $price .' '.$currency;
+    if ($price >= 1000) {
+
+        $price = number_format($price , 0,null,' ');
     }
-        $formated_price = number_format($price , 0 , '' ,"&nbsp;");
-
-        return $price = $formated_price.' '.$currency;
-
+        return $price.' '.$currency;
 }
 
 ?>
