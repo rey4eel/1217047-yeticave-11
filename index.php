@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $is_auth = rand(0, 1);
 
 $user_name = "Vartan Saakian";
@@ -8,37 +13,37 @@ $categories = ['Доски и лыжи', 'Крепления', 'Ботинки',
 $lots = [
     [
         'name' => '2014 Rossignol District Snowboard',
-        'price' =>'10999',
+        'price' => 10999,
         'img' => 'img/lot-1.jpg',
         'category' => 'Доски и лыжи',
     ],
     [
         'name' => 'DC Ply Mens 2016/2017 Snowboard',
-        'price' =>'159999',
+        'price' => 159999,
         'img' => 'img/lot-2.jpg',
         'category' => 'Доски и лыжи',
     ],
     [
         'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
-        'price' =>'8000',
+        'price' => 8000,
         'img' => 'img/lot-3.jpg',
         'category' => 'Крепления',
     ],
     [
         'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
-        'price' =>'10999',
+        'price' => 10999,
         'img' => 'img/lot-4.jpg',
         'category' => 'Ботинки',
     ],
     [
         'name' => 'Куртка для сноуборда DC Mutiny Charocal	',
-        'price' =>'7500',
+        'price' => 7500,
         'img' => 'img/lot-5.jpg',
         'category' => 'Одежда',
     ],
     [
         'name' => 'Маска Oakley Canopy',
-        'price' =>'5400	',
+        'price' => 5400,
         'img' => 'img/lot-6.jpg',
         'category' => 'Разное',
     ]
