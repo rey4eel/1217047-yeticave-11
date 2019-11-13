@@ -15,14 +15,14 @@ $lots = [
         'price' => 10999,
         'img' => 'img/lot-1.jpg',
         'category' => 'Доски и лыжи',
-        'expiration_day' => "06.01.2020",
+        'expiration_day' => "12.11.2019",
     ],
     [
         'name' => 'DC Ply Mens 2016/2017 Snowboard',
         'price' => 159999,
         'img' => 'img/lot-2.jpg',
         'category' => 'Доски и лыжи',
-        'expiration_day' => "05.01.2020",
+        'expiration_day' => "14.11.2019",
     ],
     [
         'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
@@ -89,11 +89,17 @@ $layout_content = include_template('layout.php', [
 function get_exp_time($time):string
 {
     $dt_diff = (strtotime($time) - strtotime('now'));
+    if (strpos($dt_diff, '-') !== false) {
+        return $time = 'time--expiried';
+    }
     $hour = floor($dt_diff/3600);
     $sec = $dt_diff - ($hour*3600);
     $min = floor($sec/60);
 
-    return $time = $hour.":".$min;
+    if ($hour < 1){
+        return $time = 'timer--finishing';
+    }
+    return $time = $hour.':'.$min;
 }
 
 print($layout_content);
