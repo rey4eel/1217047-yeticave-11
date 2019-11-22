@@ -7,15 +7,15 @@ USE yeticave;
 CREATE TABLE categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(256) UNIQUE NOT NULL,
-  symbol_code VARCHAR(256) UNIQUE NOT NULL
+  code VARCHAR(256) UNIQUE NOT NULL
 );
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  user_name VARCHAR(256) UNIQUE NOT NULL,
+  name VARCHAR(256) UNIQUE NOT NULL,
   email VARCHAR(256) UNIQUE NOT NULL,
   user_password VARCHAR(256) NOT NULL,
-  registration_date DATETIME NOT NULL,
+  creation_time  DATETIME DEFAULT NOW() NOT NULL,
   contacts VARCHAR(256)
 );
 
@@ -24,10 +24,10 @@ CREATE TABLE lot (
   title VARCHAR(256) NOT NULL,
   description TEXT,
   image VARCHAR(256) NOT NULL,
-  initial_price INT NOT NULL,
-  starting_date DATETIME NOT NULL,
-  ending_date DATETIME NOT NULL,
-  pace INT NOT NULL,
+  creation_time DATETIME DEFAULT NOW() NOT NULL,
+  start_date DATETIME NOT NULL,
+  end_time DATETIME NOT NULL,
+  step INT NOT NULL,
   author_id INT NOT NULL,
   winner_id INT,
   category_id INT NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE lot (
 
 CREATE TABLE bet (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  registration_date DATETIME NOT NULL,
+  creation_time DATETIME DEFAULT NOW() NOT NULL,
   amount INT NOT NULL,
   user_id INT NOT NULL,
   lot_id INT NOT NULL,
