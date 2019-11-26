@@ -58,9 +58,11 @@ SELECT * FROM categories;
 
 /*получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, текущую цену, название категории */
 
-SELECT l.initial_price, l.image, l.step, c.title
+SELECT l.initial_price, l.image, l.step, c.title, bet.amount
 FROM lot l
 JOIN categories c ON l.category_id = c.id
+JOIN bet ON bet.lot_id = l.id
+WHERE date_end > NOW()
 ORDER BY creation_time DESC;
 
 
@@ -69,7 +71,7 @@ ORDER BY creation_time DESC;
 SELECT * FROM lot
 JOIN categories
 ON lot.category_id = categories.id
-WHERE lot.id ='1';
+WHERE lot.id = 1;
 
 
 /*получить список ставок для лота по его идентификатору с сортировкой по дате */
