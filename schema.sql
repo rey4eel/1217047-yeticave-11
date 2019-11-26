@@ -25,6 +25,7 @@ CREATE TABLE lot (
   description TEXT,
   image VARCHAR(256) NOT NULL,
   creation_time DATETIME DEFAULT NOW() NOT NULL,
+  initial_price INT NOT NULL;
   start_date DATETIME NOT NULL,
   end_time DATETIME NOT NULL,
   step INT NOT NULL,
