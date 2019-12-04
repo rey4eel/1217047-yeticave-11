@@ -2,9 +2,7 @@
 require_once 'bootstrap.php';
 
 $categories = get_categories($connection);
-
 $lots = get_lots($connection);
-
 
 
 $page_content = include_template('main.php', [
