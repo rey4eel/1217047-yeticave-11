@@ -23,4 +23,27 @@ function validate_rate (string $rate) : ?string {
     return null;
 }
 
+function validate_step (string $step) : ?string {
+    if($step <= 0) {
+        return 'Шаг ставки должен быть больше 0';
+    }
+    return null;
+}
 
+function validate_category (string $category) : ?string {
+    if($category == 'Выберите категорию') {
+        return 'Выберите категорию';
+    }
+    return null;
+}
+
+function validate_message (string $message) : ?string {
+    if(empty($message)) {
+        return 'Поле не заполнено';
+    }
+    $len = strlen($message);
+    if ($len < 80 or $len > 2000) {
+        return 'Длина поля должна быть от 80 до 2000 символов';
+    }
+    return null;
+}

@@ -53,9 +53,11 @@
           <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?=getPostVal('lot-name'); ?>">
           <span class="form__error"><?=$error_input['lot-name']?></span>
         </div>
-        <div class="form__item">
+          <?php  if(!empty($error_input['category'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
+          <div class="form__item <?=$classname;?>">
           <label for="category">Категория <sup>*</sup></label>
           <select id="category" name="category" placeholder="Выберите категорию">
+
               <option>Выберите категорию</option>
               <?php foreach ($categories as $category):?>
                   <option><?=$category['title'];?></option>
@@ -66,9 +68,9 @@
       </div>
 
         <?php  if(!empty($error_input['message'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
-      <div class="form__item form__item--wide <?=$classname;?>"><!--?=getPostVal('message'); ?-->
+      <div class="form__item form__item--wide <?=$classname;?>">
         <label for="message">Описание <sup>*</sup></label>
-        <textarea id="message" name="message" placeholder="Напишите описание лота"></textarea>
+        <textarea id="message" name="message" placeholder="Напишите описание лота"><?=getPostVal('message'); ?></textarea>
         <span class="form__error"><?=$error_input['message']?></span>
       </div>
 
