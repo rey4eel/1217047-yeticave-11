@@ -11,7 +11,9 @@ require_once __DIR__.'/functions/db/db.php';
 require_once __DIR__.'/functions/db/categories.php';
 require_once __DIR__.'/functions/db/lot.php';
 require_once __DIR__.'/functions/db/lotdetail.php';
+require_once __DIR__.'/functions/db/registration.php';
 require_once __DIR__.'/functions/validators/lot.php';
 require_once __DIR__.'/functions/form/lot.php';
+require_once __DIR__.'/functions/validators/validate_registration_form.php';
+
 $connection = db_connect($config['db']);
-// подключение всего остального ...
