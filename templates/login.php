@@ -2,17 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=$title;?></title>
+    <title>Вход</title>
     <link href="../css/normalize.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
+
 <div class="page-wrapper">
 
     <header class="main-header">
         <div class="main-header__container container">
             <h1 class="visually-hidden">YetiCave</h1>
-            <a class="main-header__logo">
+            <a class="main-header__logo" href="index.html">
                 <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
             </a>
             <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru" autocomplete="off">
@@ -21,34 +22,47 @@
             </form>
             <?php if (isset($_SESSION['user'])){$link='add.php';}else{$link='404.php';}?>
             <a class="main-header__add-lot button" href="<?=$link?>">Добавить лот</a>
-
             <nav class="user-menu">
-
-                <!--Else If function added-->
-
-                <?php if (isset($_SESSION['user'])) : ?>
-                    <div class="user-menu__logged">
-                        <p><?=$_SESSION['user']?></p>
-                        <a class="user-menu__bets" href="/pages/my-bets.html">Мои ставки</a>
-                        <a class="user-menu__logout" href="/logout.php">Выход</a>
-                    </div>
-                <?php else : ?>
-                    <ul class="user-menu__list">
-                        <li class="user-menu__item">
-                            <a href="registration.php">Регистрация</a>
-                        </li>
-                        <li class="user-menu__item">
-                            <a href="login.php">Вход</a>
-                        </li>
-                    </ul>
-                <?php endif; ?>
-
-
+                <ul class="user-menu__list">
+                    <li class="user-menu__item">
+                        <a href="registration.php">Регистрация</a>
+                    </li>
+                    <li class="user-menu__item">
+                        <a href="login.php">Вход</a>
+                    </li>
+                </ul>
             </nav>
         </div>
     </header>
 
-    <main class="container"><?=$page_content;?></main>
+    <main>
+        <nav class="nav">
+            <ul class="nav__list container">
+                <?php foreach ($categories as $category): ?>
+                    <li class="nav__item">
+                        <a href="/pages/all-lots.html"><?=$category['title'];?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </nav>
+        <form class="form container" action="login.php" method="post"> <!-- form--invalid -->
+            <h2>Вход</h2>
+            <?php  if(!empty($errors['email'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
+            <div class="form__item <?=$classname?>"> <!-- form__item--invalid -->
+                <label for="email">E-mail <sup>*</sup></label>
+                <input id="email" type="text" name="email" placeholder="Введите e-mail" value="<?=getPostVal('email');?>">
+                <span class="form__error">Введите e-mail</span>
+            </div>
+            <?php  if(!empty($errors['email'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
+            <div class="form__item form__item--last <?=$classname?>">
+                <label for="password">Пароль <sup>*</sup></label>
+                <input id="password" type="password" name="password" placeholder="Введите пароль">
+                <span class="form__error">Введите пароль</span>
+            </div>
+            <button type="submit" class="button">Войти</button>
+        </form>
+    </main>
+
 </div>
 
 <footer class="main-footer">
@@ -59,7 +73,6 @@
                     <a href="/pages/all-lots.html"><?=$category['title'];?></a>
                 </li>
             <?php endforeach; ?>
-
         </ul>
     </nav>
     <div class="main-footer__bottom container">
@@ -104,7 +117,6 @@
     </div>
 </footer>
 
-<script src="flatpickr.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
+

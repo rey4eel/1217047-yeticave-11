@@ -20,14 +20,15 @@
                 <input type="search" name="search" placeholder="Поиск лота">
                 <input class="main-header__search-btn" type="submit" name="find" value="Найти">
             </form>
-            <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
+            <?php if (isset($_SESSION['user'])){$link='add.php';}else{$link='404.php';}?>
+            <a class="main-header__add-lot button" href="<?=$link?>">Добавить лот</a>
             <nav class="user-menu">
                 <ul class="user-menu__list">
                     <li class="user-menu__item">
-                        <a href="#">Регистрация</a>
+                        <a href="registration.php">Регистрация</a>
                     </li>
                     <li class="user-menu__item">
-                        <a href="#">Вход</a>
+                        <a href="login.php">Вход</a>
                     </li>
                 </ul>
             </nav>
