@@ -23,14 +23,22 @@
       </form>
       <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
       <nav class="user-menu">
-        <ul class="user-menu__list">
-          <li class="user-menu__item">
-            <a href="sign-up.html">Регистрация</a>
-          </li>
-          <li class="user-menu__item">
-            <a href="login.html">Вход</a>
-          </li>
-        </ul>
+          <?php if (isset($_SESSION['user'])) : ?>
+              <div class="user-menu__logged">
+                  <p><?=$_SESSION['user']?></p>
+                  <a class="user-menu__bets" href="/pages/my-bets.html">Мои ставки</a>
+                  <a class="user-menu__logout" href="/logout.php">Выход</a>
+              </div>
+          <?php else : ?>
+              <ul class="user-menu__list">
+                  <li class="user-menu__item">
+                      <a href="registration.php">Регистрация</a>
+                  </li>
+                  <li class="user-menu__item">
+                      <a href="login.php">Вход</a>
+                  </li>
+              </ul>
+          <?php endif; ?>
       </nav>
     </div>
   </header>
@@ -41,7 +49,7 @@
 
           <?php foreach ($categories as $category): ?>
               <li class="nav__item">
-                  <a href="pages/all-lots.html"><?=$category['title'];?></a>
+                  <a href="/pages/all-lots.html"><?=$category['title'];?></a>
               </li>
           <?php endforeach; ?>
 
@@ -67,6 +75,8 @@
             равнодушным.</p>
         </div>
         <div class="lot-item__right">
+
+            <?php if (isset($_SESSION['user'])) : ?>
           <div class="lot-item__state">
 
               <?php
@@ -75,8 +85,6 @@
 
             <div class="lot-item__timer timer <?= $hour === 0 ? 'timer--finishing' : '' ?>" >
                 <?=sprintf('%02d',$hour).':'.sprintf('%02d',$min);?>
-
-
 
             </div>
             <div class="lot-item__cost-state">
@@ -97,6 +105,8 @@
               <button type="submit" class="button">Сделать ставку</button>
             </form>
           </div>
+            <?php endif;?>
+
           <div class="history">
             <h3>История ставок (<span>10</span>)</h3>
             <table class="history__list">
@@ -164,7 +174,7 @@
     <ul class="nav__list container">
         <?php foreach ($categories as $category): ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=$category['title'];?></a>
+                <a href="/pages/all-lots.html"><?=$category['title'];?></a>
             </li>
         <?php endforeach; ?>
     </ul>

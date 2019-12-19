@@ -1,7 +1,13 @@
 <?php
 require_once 'bootstrap.php';
 
-function getPostVal($name) {
+if (isset($_SESSION['user'])) {
+    header("Location: 404.php");
+    exit();
+}
+
+function getPostVal($name)
+{
     return $_POST[$name] ?? "";
 }
 
@@ -9,7 +15,7 @@ $categories = get_categories($connection);
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_data = $_POST;
-    $errors = validate_reg_form($connection,$user_data);
+    $errors = validate_reg_form($connection, $user_data);
     if (count($errors)) {
         $page_content = include_template('registration.php', [
             'categories' => $categories,
