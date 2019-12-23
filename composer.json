@@ -1,0 +1,9 @@
+{
+    "name": "class/yeticave",
+    "description": "training website",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "respect/validation": "^1.1"
+    }
+}

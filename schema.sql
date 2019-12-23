@@ -1,8 +1,11 @@
+DROP DATABASE IF EXISTS yeticave;
+
 CREATE DATABASE yeticave;
   DEFAULT CHARACTER SET utf8;
   DEFAULT COLLATE utf8_general_ci;
 
 USE yeticave;
+
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,6 +52,6 @@ CREATE TABLE bet (
   FOREIGN KEY (lot_id) REFERENCES lot(id)
 );
 
-
+CREATE FULLTEXT INDEX lot_ft_search ON lot(title, description);
 
 
