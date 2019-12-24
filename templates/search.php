@@ -13,7 +13,7 @@
   <header class="main-header">
     <div class="main-header__container container">
       <h1 class="visually-hidden">YetiCave</h1>
-      <a class="main-header__logo" href="index.html">
+      <a class="main-header__logo" href="/index.php">
         <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
       </a>
       <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru" autocomplete="off">
@@ -26,7 +26,7 @@
           <?php if (isset($_SESSION['user'])) : ?>
               <div class="user-menu__logged">
                   <p><?=$_SESSION['user']?></p>
-                  <a class="user-menu__bets" href="/pages/my-bets.html">Мои ставки</a>
+                  <a class="user-menu__bets" href="/mybets.php">Мои ставки</a>
                   <a class="user-menu__logout" href="/logout.php">Выход</a>
               </div>
           <?php else : ?>
@@ -56,8 +56,8 @@
     <div class="container">
       <section class="lots">
         <h2>Результаты поиска по запросу «<span><?=$search;?></span>»</h2>
-          <?php foreach ($search_data as $data): ?>
         <ul class="lots__list">
+            <?php foreach ($search_data as $data): ?>
           <li class="lots__item lot">
             <div class="lot__image">
               <img src="../img/lot-1.jpg" width="350" height="260" alt="Сноуборд">
@@ -76,8 +76,8 @@
               </div>
             </div>
           </li>
+            <?php endforeach; ?>
         </ul>
-          <?php endforeach; ?>
       </section>
         <?php if (count($pages) > 1) {
             echo include_template('paginator.php', [

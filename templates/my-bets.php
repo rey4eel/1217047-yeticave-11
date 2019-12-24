@@ -2,138 +2,109 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Добавление лота</title>
+  <title>Мои ставки</title>
   <link href="../css/normalize.min.css" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
-  <link href="../css/flatpickr.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="page-wrapper">
 
   <header class="main-header">
-  <div class="main-header__container container">
-    <h1 class="visually-hidden">YetiCave</h1>
-    <a class="main-header__logo" href="/index.php">
-      <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
-    </a>
-    <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru" autocomplete="off">
-      <input type="search" name="search" placeholder="Поиск лота">
-      <input class="main-header__search-btn" type="submit" name="find" value="Найти">
-    </form>
-      <?php if (isset($_SESSION['user'])){$link='add.php';}else{$link='404.php';}?>
-      <a class="main-header__add-lot button" href="<?=$link?>">Добавить лот</a>
-    <nav class="user-menu">
-        <?php if (isset($_SESSION['user'])) : ?>
-            <div class="user-menu__logged">
-                <p><?=$_SESSION['user']?></p>
-                <a class="user-menu__bets" href="/mybets.php">Мои ставки</a>
-                <a class="user-menu__logout" href="/logout.php">Выход</a>
-            </div>
-        <?php else : ?>
-            <ul class="user-menu__list">
-                <li class="user-menu__item">
-                    <a href="registration.php">Регистрация</a>
-                </li>
-                <li class="user-menu__item">
-                    <a href="login.php">Вход</a>
-                </li>
-            </ul>
-        <?php endif; ?>
-    </nav>
-  </div>
-</header>
+    <div class="main-header__container container">
+      <h1 class="visually-hidden">YetiCave</h1>
+      <a class="main-header__logo" href="index.html">
+        <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
+      </a>
+      <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru" autocomplete="off">
+        <input type="search" name="search" placeholder="Поиск лота">
+        <input class="main-header__search-btn" type="submit" name="find" value="Найти">
+      </form>
+        <?php if (isset($_SESSION['user'])){$link='add.php';}else{$link='404.php';}?>
+        <a class="main-header__add-lot button" href="<?=$link?>">Добавить лот</a>
+        <nav class="user-menu">
+            <?php if (isset($_SESSION['user'])) : ?>
+                <div class="user-menu__logged">
+                    <p><?=$_SESSION['user']?></p>
+                    <a class="user-menu__bets" href="/mybets.php">Мои ставки</a>
+                    <a class="user-menu__logout" href="/logout.php">Выход</a>
+                </div>
+            <?php else : ?>
+                <ul class="user-menu__list">
+                    <li class="user-menu__item">
+                        <a href="registration.php">Регистрация</a>
+                    </li>
+                    <li class="user-menu__item">
+                        <a href="login.php">Вход</a>
+                    </li>
+                </ul>
+            <?php endif; ?>
+      </nav>
+    </div>
+  </header>
 
   <main>
     <nav class="nav">
       <ul class="nav__list container">
-            <?php foreach ($categories as $category):?>
-                  <li class="nav__item">
-                      <a href="pages/all-lots.html"><?=$category['title'];?></a>
-                  </li>
-            <?php endforeach; ?>
+          <?php foreach ($categories as $category):?>
+              <li class="nav__item">
+                  <a href="/pages/all-lots.html"><?=$category['title'];?></a>
+              </li>
+          <?php endforeach; ?>
       </ul>
     </nav>
+    <section class="rates container">
+      <h2>Мои ставки</h2>
+      <table class="rates__list">
 
-      <?php  if(!empty($errors)) {$classname ='form--invalid';} else {$classname ='';} ?>
-    <form class="form form--add-lot container <?=$classname;?> " action="add.php" method="post" enctype="multipart/form-data"> <!--  $error_input['check'] === 'false' ? 'form--invalid' : ''  -->
-      <h2>Добавление лота</h2>
-      <div class="form__container-two">
-          <?php  if(!empty($errors['lot-name'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
-        <div class="form__item <?=$classname;?> "> <!-- form__item--invalid -->
-          <label for="lot-name">Наименование <sup>*</sup></label>
-          <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?=getPostVal('lot-name'); ?>">
-          <span class="form__error"><?=$errors['lot-name']?></span>
-        </div>
-          <?php  if(!empty($errors['category'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
-          <div class="form__item <?=$classname;?>">
-          <label for="category">Категория <sup>*</sup></label>
-          <select id="category" name="category">
-              <option>Выберите категорию</option>
-              <?php foreach ($categories as $category):?>
-                  <option <?= 'value="'.$category['id'].'"'; ?>> <?=$category['title'];?></option>
-              <?php endforeach; ?>
-          </select>
-          <span class="form__error">Выберите категорию</span>
-        </div>
-      </div>
+          <?php foreach ($my_bets as $bets): ?>
+        <tr class="rates__item">
+          <td class="rates__info">
+            <div class="rates__img">
+              <img src="<?=$bets['image']?>" width="54" height="40" alt="Сноуборд">
+            </div>
+            <h3 class="rates__title"><a href="/lot.php?id=<?=$bets['id']?>"><?=$bets['title']?></a></h3>
 
-        <?php  if(!empty($errors['message'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
-      <div class="form__item form__item--wide <?=$classname;?>">
-        <label for="message">Описание <sup>*</sup></label>
-        <textarea id="message" name="message" placeholder="Напишите описание лота"><?=getPostVal('message'); ?></textarea>
-        <span class="form__error"><?=$errors['message']?></span>
-      </div>
+          </td>
+          <td class="rates__category">
+              <?=$bets['cat']?>
+          </td>
+          <td class="rates__timer">
+                <?php
+                list($hour,$min)= get_exp_time($bets['end_date']);
+                ?>
 
-      <div class="form__item form__item--file">
-        <label>Изображение <sup>*</sup></label>
-          <?php  if(!empty($errors['file'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
-        <div class="form__input-file <?=$classname;?>">
-          <input class="visually-hidden" type="file" id="fileID" name="fileID">
-          <label for="fileID">
-            Добавить
-          </label>
-            <span class="form__error"><?= $errors['file'] ?></span>
-        </div>
-      </div>
+                <div class="lot-item__timer timer <?= $hour === 0 ? 'timer--finishing' : '' ?>" >
+                    <?=sprintf('%02d',$hour).':'.sprintf('%02d',$min);?>
 
-      <div class="form__container-three">
-          <?php  if(!empty($errors['lot-rate'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
-        <div class="form__item form__item--small <?=$classname?>">
-          <label for="lot-rate">Начальная цена <sup>*</sup></label>
-          <input id="lot-rate" type="text" name="lot-rate" placeholder="0" value="<?=getPostVal('lot-rate'); ?>">
-          <span class="form__error"><?=$errors['lot-rate']?></span>
-        </div>
-          <?php  if(!empty($errors['lot-step'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
-        <div class="form__item form__item--small <?=$classname?>">
-          <label for="lot-step">Шаг ставки <sup>*</sup></label>
-          <input id="lot-step" type="text" name="lot-step" placeholder="0" value="<?=getPostVal('lot-step'); ?>">
-          <span class="form__error"><?=$errors['lot-rate']?></span>
-        </div>
-          <?php  if(!empty($errors['lot-date'])) {$classname ='form__item--invalid';} else {$classname ='';} ?>
-        <div class="form__item <?=$classname?>">
-          <label for="lot-date">Дата окончания торгов <sup>*</sup></label>
-          <input class="form__input-date" id="lot-date" type="text" name="lot-date" placeholder="Введите дату в формате ГГГГ-ММ-ДД" value="<?=getPostVal('lot-date'); ?>">
-          <span class="form__error"><?=$errors['lot-date']?></span>
-        </div>
-      </div>
-      <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
-      <button type="submit" class="button">Добавить лот</button>
-    </form>
+          </td>
+          <td class="rates__price">
+              <?=$bets['amount']?> р
+          </td>
+          <td class="rates__time">
+            5 минут назад
+          </td>
+        </tr>
+          <?php endforeach; ?>
+
+
+      </table>
+    </section>
   </main>
 
 </div>
 
 <footer class="main-footer">
-  <nav class="nav">
-    <ul class="nav__list container">
-        <?php foreach ($categories as $category):?>
-            <li class="nav__item">
-                <a href="pages/all-lots.html"><?=$category['title'];?></a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-  </nav>
+    <nav class="nav">
+        <ul class="nav__list container">
+            <?php foreach ($categories as $category): ?>
+                <li class="nav__item">
+                    <a href="/pages/all-lots.html"><?=$category['title'];?></a>
+                </li>
+            <?php endforeach; ?>
+
+        </ul>
+    </nav>
   <div class="main-footer__bottom container">
     <div class="main-footer__copyright">
       <p>© 2019, YetiCave</p>
@@ -176,7 +147,5 @@
   </div>
 </footer>
 
-<script src="../flatpickr.js"></script>
-<script src="../script.js"></script>
 </body>
 </html>
