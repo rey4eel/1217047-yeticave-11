@@ -15,3 +15,28 @@ function get_lots(mysqli $connection): ?array {
     }
     return mysqli_fetch_all($request,MYSQLI_ASSOC);
 }
+
+function get_expired_lots_without_win(mysqli $connection): array
+{
+    $sql = "SELECT id FROM lots WHERE end_time <= NOW() AND winner_id IS NULL";
+    $lots = mysqli_fetch_all(mysqli_query($connection,  $sql), MYSQLI_ASSOC);
+    return $lots ?? [];
+}
+
+function get_winner(mysqli $connection, int $lot_id): ?array
+{
+    $sql = "
+SELECT b.user_id,
+       u.name as user_name,
+       u.email,
+       l.title as lot_name
+FROM bets b
+         INNER JOIN users u ON b.user_id = u.id
+         INNER JOIN lot l ON b.lot_id = l.id
+WHERE lot_id = $lot_id
+ORDER BY SUM DESC
+LIMIT 1
+";
+    $result = mysqli_fetch_array(mysqli_query($connection, $sql), MYSQLI_ASSOC);
+    return $result ?? [];
+}

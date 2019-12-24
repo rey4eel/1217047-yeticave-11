@@ -1,6 +1,6 @@
 <?php
 require_once 'bootstrap.php';
-
+require_once 'getwinner.php';
 $categories = get_categories($connection);
 $lots = get_lots($connection);
 

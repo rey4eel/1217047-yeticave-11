@@ -9,10 +9,10 @@ return [
         'database' => 'yeticave'
     ],
     'mailer' => [
-        'host' => '',
-        'username' => '',
-        'password' => '',
-        'port' => '465',
+        'host' => 'phpdemo.ru',
+        'username' => 'keks@phpdemo.ru',
+        'password' => 'htmlacademy',
+        'port' => '25',
         'encryption' => 'SSL'
     ]
 ];

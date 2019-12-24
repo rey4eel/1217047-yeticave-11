@@ -14,14 +14,15 @@
   <header class="main-header">
     <div class="main-header__container container">
       <h1 class="visually-hidden">YetiCave</h1>
-      <a class="main-header__logo" href="index.html">
+      <a class="main-header__logo" href="/index.php">
         <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
       </a>
       <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru" autocomplete="off">
         <input type="search" name="search" placeholder="Поиск лота">
         <input class="main-header__search-btn" type="submit" name="find" value="Найти">
       </form>
-      <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
+        <?php if (isset($_SESSION['user'])){$link='add.php';}else{$link='404.php';}?>
+        <a class="main-header__add-lot button" href="<?=$link?>">Добавить лот</a>
       <nav class="user-menu">
           <?php if (isset($_SESSION['user'])) : ?>
               <div class="user-menu__logged">
@@ -116,7 +117,14 @@
               <tr class="history__item">
                 <td class="history__name"><?=$data['name']?></td>
                 <td class="history__price"><?=$data['amount']?>р</td>
-                <td class="history__time">5 минут назад</td>
+                <td class="history__time">
+
+                    <?php
+                    list($hour,$min)= get_post_time($data['creation_time']);
+                    ?>
+                    <?=sprintf('%2d',$hour).'часа'." ".sprintf('%02d',$min).'минут назад';?>
+
+                </td>
               </tr>
                 <?php endforeach; ?>
             </table>
