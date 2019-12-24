@@ -17,14 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $lot_data = get_lot_data($_POST);
     $errors = validate_lot_form($lot_data,$file_data);
 
-    //var_dump($_POST);
     if (count($errors) === 0){
         $lot_data['file'] = save_file($_FILES['fileID']);
         $insert = insert_lot_data($connection,$lot_data);
         if ($insert) {
             header("Location: lot.php?id=" . $insert);
         }
-        else{echo "NEgotovo";}
+        else{echo "";}
 
     }else{
         $errors['check'] = '1';

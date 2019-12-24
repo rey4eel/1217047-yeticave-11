@@ -9,7 +9,7 @@ function get_search_data(mysqli $connection, ?string $search,?int $limit,?int $o
 
     $query = "SELECT lot.id, lot.title, lot.description, lot.image, lot.initial_price,lot.end_date,categories.title AS category FROM lot 
 JOIN categories ON lot.category_id = categories.id
-WHERE MATCH(lot.title, lot.description) AGAINST('{$search}' IN NATURAL LANGUAGE MODE) LIMIT 6 OFFSET 3";
+WHERE MATCH(lot.title, lot.description) AGAINST('{$search}' IN NATURAL LANGUAGE MODE) LIMIT {$limit} OFFSET {$offset}";
 
     $request = mysqli_query($connection, $query);
 
