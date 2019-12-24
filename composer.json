@@ -4,6 +4,7 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "respect/validation": "^1.1"
+        "respect/validation": "^1.1",
+        "swiftmailer/swiftmailer": "^6.2"
     }
 }
